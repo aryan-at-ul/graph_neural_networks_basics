@@ -1,6 +1,9 @@
 from igraph import *
 # from WL import *
 import igraph
+import matplotlib.pyplot as plt
+
+
 def generateTree(nodes, seed):
     degree = seed;
     g = Graph.Tree(nodes, degree)
@@ -14,8 +17,12 @@ def displayG(g):
     layout = g.layout("kk")
     plot(g, layout = layout)
 
-G1 = generateTree(5, 2)
-G2 = generateTree(5, 4)
+G1 = generateTree(20, 2)
+G2 = generateTree(20, 2)
+#G2.layout(layout='kamada_kawai') #docs: https://igraph.org/python/doc/tutorial/tutorial.html#layouts-and-plotting
+layout1 = G1.layout_kamada_kawai()
+layout2 = G2.layout_circle()
+
 G3 = generateRandom(0.1)
 G4 = generateRandom(0.2)
 n = 12
@@ -134,7 +141,10 @@ color_indices = [id_gen.add(value) for value in colar]
 palette = ClusterColoringPalette(len(id_gen))
 colors = [palette[index] for index in color_indices]
 G1.vs["color"] = colors
-displayG(G1)
+
+#displayG(G1)
+plot(G1, layout=layout1)
+
 
 run_iterations(G2)
 
@@ -148,8 +158,8 @@ palette = ClusterColoringPalette(len(id_gen))
 colors = [palette[index] for index in color_indices]
 G2.vs["color"] = colors
 
-displayG(G2)
-
+#displayG(G2)
+plot(G2, layout=layout2)
 # for e in G1.es:
 #     print(e.source,e.target)
 
