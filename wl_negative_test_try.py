@@ -113,7 +113,7 @@ def run_iterations(G,n = 2):
             for nv in v.neighbors():
                 v['hashs'].append(nv['cl'])
             print("@@@@@@@@@@@@",v['hashs'])
-            # v['hashs'].sort()
+            v['hashs'].sort()
             hh,nextc = hash_to_nums(v['hashs'],nv['cl'])
             print("current hash",v,hh,nextc)
             # v['hashs'] = nextc
